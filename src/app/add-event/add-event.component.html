@@ -1,0 +1,24 @@
+<app-dashboard></app-dashboard>
+<div class="container">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col">
+            <form (ngSubmit)="addEvent()" [formGroup]="eventForm">
+                <p class="fs-4">Add your Event</p>
+
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" formControlName="event_name" name="event_name" placeholder="Event Name">
+                </div>
+                <div *ngIf="(this.eventForm.get('event_name')?.errors) && (this.eventForm.get('event_name')?.dirty || this.eventForm.get('event_name')?.touched)" class="error">this field is required</div>
+                <div class="input-group mb-3">
+                    <input type="date" class="form-control" formControlName="date" name="date">
+                </div>
+                <div *ngIf="(this.eventForm.get('date')?.errors) && (this.eventForm.get('date')?.dirty || this.eventForm.get('date')?.touched)" class="error">Date is required</div>
+            
+                <button type="submit" class="btn btn-dark btn-sm">Add Event</button>
+
+            </form>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
