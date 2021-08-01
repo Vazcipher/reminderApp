@@ -15,7 +15,9 @@ export class AddEventComponent implements OnInit {
     date:["",[Validators.required]]
   })
 
-  constructor(private fb:FormBuilder, private ds:DataService,private router:Router) {}
+  constructor(private fb:FormBuilder, private ds:DataService,private router:Router) {
+    ds.getDetails()
+  }
 
   ngOnInit(): void {
   }

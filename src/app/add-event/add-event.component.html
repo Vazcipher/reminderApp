@@ -11,7 +11,7 @@
                 </div>
                 <div *ngIf="(this.eventForm.get('event_name')?.errors) && (this.eventForm.get('event_name')?.dirty || this.eventForm.get('event_name')?.touched)" class="error">this field is required</div>
                 <div class="input-group mb-3">
-                    <input type="date" class="form-control" formControlName="date" name="date">
+                    <input type="date" class="form-control" formControlName="date" name="date" placeholder="Event date">
                 </div>
                 <div *ngIf="(this.eventForm.get('date')?.errors) && (this.eventForm.get('date')?.dirty || this.eventForm.get('date')?.touched)" class="error">Date is required</div>
             

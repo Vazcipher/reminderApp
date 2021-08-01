@@ -1,19 +1,19 @@
 <div class="container">
     <div class="row"  style="margin-top: 100px;">
         <div class="col"></div>
-        <div class="col">
+        <div class="col-md-4 coll-xs-12">
             <form (ngSubmit)="register()" [formGroup]="registerForm">
-                <p class="fs-4">Register for Reminder</p>
+                <p class="fs-4">Register Your Account</p>
 
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" formControlName="user_id" name="user_id" placeholder="pleas Enter a user id" >
+                    <input type="text" class="form-control" formControlName="user_id" name="user_id" placeholder="Pleas enter  user id" >
                 </div>
-                <div *ngIf="(this.registerForm.get('user_id')?.errors) && (this.registerForm.get('user_id')?.touched || this.registerForm.get('user_id')?.dirty)" class="error">Invalid User name</div>
+                <div *ngIf="(this.registerForm.get('user_id')?.errors) && (this.registerForm.get('user_id')?.touched || this.registerForm.get('user_id')?.dirty)" class="error">Invalid User name. User name must be in digits</div>
 
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" formControlName="name" name="name" placeholder="Enter Your Name">
+                    <input type="text" class="form-control" formControlName="name" name="name" placeholder="Enter your name">
                 </div>
-                <div *ngIf="(this.registerForm.get('name')?.errors) && (this.registerForm.get('name')?.touched || this.registerForm.get('name')?.dirty)" class="error">Invalid User name</div>
+                <div *ngIf="(this.registerForm.get('name')?.errors) && (this.registerForm.get('name')?.touched || this.registerForm.get('name')?.dirty)" class="error">Invalid User name.</div>
 
                 
                 <div class="input-group mb-3">
