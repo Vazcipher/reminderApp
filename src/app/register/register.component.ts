@@ -27,20 +27,17 @@ export class RegisterComponent implements OnInit {
       var name=this.registerForm.value.name;
       var password=this.registerForm.value.password;
   
-      let registerResult=this.ds.register(user_id,name,password) 
-      console.log(registerResult);
-      if(registerResult){
-        alert("Successfully Registered, please login")
-        this.router.navigateByUrl("")
-      }
-      else{
-        alert("This user id id already exist")
-      }
+      this.ds.register(user_id,name,password).subscribe((result:any)=>{
+        if(result){
+          alert(result.message)
+          this.router.navigateByUrl("")
+        }
+      },(result)=>{
+        alert(result.error.message)
+      })
     }
     else{
       alert("Invalid Form")
     }
-    
   }
-
 }

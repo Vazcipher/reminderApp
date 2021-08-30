@@ -9,7 +9,14 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ListEventsComponent } from './list-events/list-events.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddEventComponent } from './add-event/add-event.component';
-
+import {HttpClientModule} from '@angular/common/http'
+import { DatePipe } from '@angular/common';
+import { EditEventComponent } from './edit-event/edit-event.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatDialogModule} from '@angular/material/dialog'
+  
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,15 +24,23 @@ import { AddEventComponent } from './add-event/add-event.component';
     RegisterComponent,
     DashboardComponent,
     ListEventsComponent,
-    AddEventComponent
+    AddEventComponent,
+    EditEventComponent,
+    NavbarComponent
   ],
+  entryComponents:[EditEventComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatBadgeModule,
+    MatDialogModule
+
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import {HttpClient} from '@angular/common/http'
+const options={
+  withCredentials:true
+}
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class DataService {
 
-  currentUser=""
+  currentUser:any
   logedUserName=""
 
   users:any={
@@ -17,31 +22,31 @@ export class DataService {
   }
 
 
-  constructor(private router:Router) {}
+  constructor(private router:Router,private http:HttpClient) {this.currentUser=localStorage.getItem("currentUser")}
 
-  addEvent(evnt:any,dte:any){
-    this.getDetails()
-    console.log(this.currentUser);
-    let userDetails=this.users
-    if(this.currentUser in userDetails){
-      userDetails[this.currentUser].events.push({
-        event:evnt,
-        date:dte
-      })
-      console.log(userDetails);
-      this.saveDetails()
-      alert("Event added successfully")
-      return userDetails[this.currentUser].events
-    }
-  }
-  showLogedUser(){
-    return this.users[this.currentUser]["name"]
-  }
+  // addEvent(evnt:any,dte:any){
+  //   this.getDetails()
+  //   console.log(this.currentUser);
+  //   let userDetails=this.users
+  //   if(this.currentUser in userDetails){
+  //     userDetails[this.currentUser].events.push({
+  //       event:evnt,
+  //       date:dte
+  //     })
+  //     console.log(userDetails);
+  //     this.saveDetails()
+  //     alert("Event added successfully")
+  //     return userDetails[this.currentUser].events
+  //   }
+  // }
+  // showLogedUser(){
+  //   return this.users[this.currentUser]["name"]
+  // }
 
-  listEvents(){
-      this.getDetails()
-      return this.users[this.currentUser].events
-  }
+  // listEvents(){
+  //     this.getDetails()
+  //     return this.users[this.currentUser].events
+  // }
 
   saveDetails(){
     let userDetails=this.users
@@ -49,49 +54,62 @@ export class DataService {
 
   }
 
-  getDetails(){
-    if(localStorage.getItem("users")){
-      this.users=JSON.parse(localStorage.getItem("users")||"")
-      console.log(this.users);
+  // getDetails(){
+  //   if(localStorage.getItem("users")){
+  //     this.users=JSON.parse(localStorage.getItem("users")||"")
+  //     console.log(this.users);
+  //   }
+  //   if(localStorage.getItem("currentUser")){
+  //     this.currentUser=JSON.parse(localStorage.getItem("currentUser")||"")
+  //   }
+  // }
+
+  addEvents(userId:any,eventName:any,date:any){
+    const data={
+      userId,
+      eventName,
+      date
     }
-    if(localStorage.getItem("currentUser")){
-      this.currentUser=JSON.parse(localStorage.getItem("currentUser")||"")
-    }
+    return this.http.post("http://localhost:3000/addEvents",data,options)
   }
 
-  register(uid:any,name:any,password:any){
-    let userDetails=this.users
+  getAllEvents(){
+    return this.http.get("http://localhost:3000/getAllEvents",options)
+  }
 
-      if(uid in userDetails){
-        return false
-      }
-      else{
-        userDetails[uid]={
-          uid,name,password,events:[]
-        }
-        this.saveDetails()
-        return true
-      }
+  getTodayEvent(dateFormated:any){
+    const data={
+      dateFormated
+    }
+    return this.http.post("http://localhost:3000/getTodayEvent",data,options)
+
+  }
+
+  register(userId:any,userName:any,password:any){
+
+    const data={
+      userId,
+      userName,
+      password
+    }
+
+    return this.http.post("http://localhost:3000/register",data)
   }
 
   
-  login(uid:any,pswd:any){
-    // this.getDetails()
-    let userDetails=this.users;
+  login(userId:any,password:any){
 
-    if(uid in userDetails){
-      if(pswd == userDetails[uid]["password"]){
-        localStorage.setItem("currentUser",JSON.stringify(userDetails[uid]["uid"]))
-        this.getDetails()
-        return 1
-      }
-      else{
-        return -1
-      }
+    const data={
+      userId,
+      password
     }
-    else{
-      return 0
-    }
+
+    return this.http.post("http://localhost:3000/login",data,options)
+  }
+
+  deleteEvent(i:any){
+
+    return this.http.delete("http://localhost:3000/deleteEvent/"+i,options)
   }
 
 }

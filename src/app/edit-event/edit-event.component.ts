@@ -4,11 +4,11 @@ import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 
 @Component({
-  selector: 'app-add-event',
-  templateUrl: './add-event.component.html',
-  styleUrls: ['./add-event.component.css']
+  selector: 'app-edit-event',
+  templateUrl: './edit-event.component.html',
+  styleUrls: ['./edit-event.component.css']
 })
-export class AddEventComponent implements OnInit {
+export class EditEventComponent implements OnInit {
 
   currentUser:any
   eventForm=this.fb.group({
@@ -22,7 +22,7 @@ export class AddEventComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  addEvent(){
+  editEvent(){
 
     if(this.eventForm.valid){
       var event_name=this.eventForm.value.event_name
@@ -43,5 +43,6 @@ export class AddEventComponent implements OnInit {
       alert("Invalid Form")
     }
   }
+
 
 }

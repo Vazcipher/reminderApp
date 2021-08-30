@@ -1,20 +1,28 @@
-<app-dashboard></app-dashboard>
+
 <div class="container">
-    <div class="row">
+  <app-navbar></app-navbar>
+    <div class="row" style="margin-top: 50px;">
         <div class="col"></div>
         <div class="col-md-4 col-xs-12">
             <p class="fs-4">Here is your Events..</p>
             <table class="table table-primary">
                 <thead>
                   <tr>
+                    <th scope="col">ID</th>
                     <th scope="col">Your Events</th>
                     <th scope="col">Date</th>
+                    <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let event of events">
+                  <tr *ngFor="let event of events; let i = index">
+                    <td>{{i}}</td>
                     <td>{{event.event}}</td>
-                    <td>{{event.date}}</td>
+                    <td>{{event.eventDate}}</td>
+                    <td>
+                      <button (click)="deleteEvent(i)" class="btn btn-danger btn-sm">DELETE</button>
+                      <button  (click)="openEditDialog()" class="btn btn-primary btn-sm">EDIT</button>
+                  </td>
                   </tr>
                 </tbody>
               </table>

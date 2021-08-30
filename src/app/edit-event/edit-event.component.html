@@ -1,11 +1,10 @@
 
 <div class="container">
-    <app-navbar></app-navbar>
-    <div class="row" style="margin-top: 50px;">
+    <div class="row">
         <div class="col"></div>
         <div class="col-md-4 col-xs-12">
-            <form (ngSubmit)="addEvent()" [formGroup]="eventForm">
-                <p class="fs-4">Add your Event</p>
+            <form (ngSubmit)="editEvent()" [formGroup]="eventForm">
+                <p class="fs-4">Edit your Event</p>
 
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" formControlName="event_name" name="event_name" placeholder="Event Name">
